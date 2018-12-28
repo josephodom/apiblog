@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>API Blog</title>
-<link rel="stylesheet" type="text/css" href="assets/css/bulma.min.css">
+<link rel="stylesheet" type="text/css" href="<?=url()?>/assets/css/bulma.min.css">
 </head>
 
 <body>
@@ -19,7 +19,7 @@
 </header>
 
 <main>
-	
+	<?=$yield?>
 </main>
 
 <footer>

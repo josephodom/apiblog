@@ -9,7 +9,7 @@ function FatalError($e){
 		$errorsSoFar = file_get_contents($errorFile);
 	}
 	
-	file_put_contents($errorFile, $errorsSoFar . '[ ' . date('Y-m-d g:i:sa') . ' ]' . $e . "\n\n");
+	file_put_contents($errorFile, $errorsSoFar . '[ ' . date('Y-m-d g:i:sa') . ' ] ' . $e . "\n\n");
 	
 	http_response_code(500);
 	
@@ -57,6 +57,34 @@ main {
 </main>
 </body>
 </html>');
+}
+
+// Get a template
+function template($file, $vars = []){
+	extract($vars);
+	
+	ob_start();
+	include './templates/' . $file . '.php';
+	return ob_get_clean();
+}
+
+// Get the base URL to the site
+function url(){
+	return
+		'http' . (
+			!empty($_SERVER['HTTPS']) ?
+				's'
+			:
+				''
+		)
+		. 
+		'://' . $_SERVER['SERVER_NAME'] . @array_shift(
+			explode(
+				'/index.php',
+				$_SERVER['SCRIPT_NAME']
+			)
+		)
+	;
 }
 
 ?>
