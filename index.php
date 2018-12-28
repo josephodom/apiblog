@@ -5,6 +5,7 @@
 foreach([
 	'class.blog',
 	'class.db',
+	'functions',
 ] as $file){
 	require_once $file . '.php';
 }
@@ -16,6 +17,8 @@ foreach([
 // Database connection
 
 DB::Init('localhost', 'apiblog', 'root', '');
+
+die('<pre>' . print_r(Blog::Read([ 'limit' => 1, 'page' => 1 ]), true) . '</pre>');
 
 
 

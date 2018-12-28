@@ -3,6 +3,6 @@ CREATE TABLE IF NOT EXISTS posts (
 	uid int unsigned,
 	title varchar(255),
 	message text,
-	date_posted int unsigned,
+	date_created int unsigned,
 	date_last_edited int unsigned
 );

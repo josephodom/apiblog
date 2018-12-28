@@ -12,14 +12,27 @@ class DB {
 	// == PUBLIC ==
 	
 	// Initialize
+	
 	public static function Init($host, $dbname, $user, $pass){
+		// Create PDO object
+		
 		try {
 			self::$pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
 		}
 		catch(Exception $e){
-			// TODO: Fatal Error function
-			die('fatal error');
+			FatalError($e);
 		}
+		
+		
+		
+		// Set PDO attributes
+		
+		// We want it to throw an exception whenever there's an SQL syntax error
+		self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+		
+		
+		// Run SQL table creation files
 		
 		$sqlTablesDir = './sql/tables';
 		
@@ -37,16 +50,62 @@ class DB {
 	}
 	
 	// PDO wrapper functions
-	public static function Query(){
-		return self::_Method('query', func_get_args());
+	
+	public static function Fetch(){
+		try {
+			$args = func_get_args();
+			
+			if(count($args) == 1){
+				$args[] = PDO::FETCH_OBJ;
+			}
+			
+			return call_user_func_array([ array_shift($args), 'fetch' ], $args);
+		}
+		catch(Exception $e){
+			FatalError($e);
+		}
+	}
+	
+	public static function FetchAll(){
+		try {
+			$args = func_get_args();
+			
+			if(count($args) == 1){
+				$args[] = PDO::FETCH_OBJ;
+			}
+			
+			return call_user_func_array([ array_shift($args), 'fetchAll' ], $args);
+		}
+		catch(Exception $e){
+			FatalError($e);
+		}
+	}
+	
+	public static function Execute($q, $values = []){
+		try {
+			$q->execute($values);
+		}
+		catch(Exception $e){
+			FatalError($e);
+		}
 	}
 	
 	public static function Prepare(){
-		return self::_Method('prepare', func_get_args());
+		try {
+			return self::_Method('prepare', func_get_args());
+		}
+		catch(Exception $e){
+			FatalError($e);
+		}
 	}
 	
-	public static function Execute(){
-		return self::_Method('execute', func_get_args());
+	public static function Query(){
+		try {
+			return self::_Method('query', func_get_args());
+		}
+		catch(Exception $e){
+			FatalError($e);
+		}
 	}
 }
 
