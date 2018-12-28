@@ -3,10 +3,6 @@
 class Blog {
 	// == STATIC FUNCTIONS ==
 	
-	public static function Init(){
-		// TODO: Make sure all the tables are created
-	}
-	
 	public static function Create(){
 		// TODO: Create new blog post
 	}

@@ -4,10 +4,18 @@
 
 foreach([
 	'class.blog',
-	'db'
+	'class.db',
 ] as $file){
 	require_once $file . '.php';
 }
+
+
+
+
+
+// Database connection
+
+DB::Init('localhost', 'apiblog', 'root', '');
 
 
 
