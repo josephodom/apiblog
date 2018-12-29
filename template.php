@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>API Blog</title>
 <link rel="stylesheet" type="text/css" href="<?=url()?>/assets/css/bulma.min.css">
+<link rel="stylesheet" type="text/css" href="<?=url()?>/assets/css/custom.css">
 </head>
 
 <body>

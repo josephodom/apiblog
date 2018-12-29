@@ -59,12 +59,48 @@ main {
 </html>');
 }
 
+// Turn natural input content into HTML paragraphs
+function nl2p($content){
+	// First, let's drop any return characters that might cause confusion
+	$content = str_replace("\r", '', $content);
+	
+	// Second, remove redundant spaces from the content
+	// We're gonna limit the content to one space between words
+	// Note: if you replace two spaces with nothing, then an even number of spaces will turn into nothing!
+	do {
+		$oldContent = $content;
+		$content = str_replace("\n\n", "\n", $content);
+	}
+	while($content != $oldContent);
+	
+	// Third, break it into paragraphs by spaces
+	$content = explode("\n", $content);
+	
+	// Fourth, form it into <p> paragraphs
+	$content = '<p>' . implode('</p><p>', $content) . '</p>';
+	
+	// Finally, return the formatted content
+	return $content;
+}
+
 // Get a template
 function template($file, $vars = []){
+	// Make sure the requested template exists
+	// If it doesn't, just return false
+	if(!file_exists($file = './templates/' . $file . '.php')){
+		return false;
+	}
+	
+	// We extract $vars so that any values inside of it are now local vars to the template we're importing
 	extract($vars);
 	
+	// Start recording any output
 	ob_start();
-	include './templates/' . $file . '.php';
+	// Include the requested template
+	// Using include rather than require just means it won't crash if the file doesn't exist
+	// We already did error handling so there shouldn't be a difference in this context, but just in case
+	include $file;
+	// Now, return all of the recorded output
 	return ob_get_clean();
 }
 

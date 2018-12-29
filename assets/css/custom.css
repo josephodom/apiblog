@@ -1,0 +1,30 @@
+header {
+	margin-bottom: 1em;
+}
+
+h2 small {
+	font-weight: normal;
+	font-size: 0.75em;
+	white-space: nowrap;
+}
+
+.list-posts li {
+	margin-bottom: 2em;
+}
+
+.pagination-container {
+	display: flex;
+}
+
+.pagination-container .pagination-binary-button {
+	flex-shrink: 0;
+}
+
+.pagination-container .pagination-page-numbers {
+	flex-grow: 1;
+	text-align: center;
+}
+
+.pagination-container .pagination-page-numbers .list-pagination-page-numbers li {
+	display: inline-block;
+}

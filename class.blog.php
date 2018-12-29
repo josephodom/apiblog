@@ -1,6 +1,15 @@
 <?php
 
 class Blog {
+	// == STATIC VARIABLES ==
+	
+	public static
+		$pageCount = 0,
+		$totalResults = 0
+	;
+	
+	
+	
 	// == STATIC FUNCTIONS ==
 	
 	public static function Create($values){
@@ -36,7 +45,15 @@ class Blog {
 			$values['keys'] = '*';
 		}
 		
-		$q = DB::Prepare("SELECT " . $values['keys'] . " FROM posts ORDER BY " . $values['orderby'] . " " . $values['order'] . " LIMIT " . ($values['limit'] * ($values['page'] - 1)) . ", " . $values['limit']);
+		$sql = "SELECT {{KEYS}} FROM posts ORDER BY " . $values['orderby'] . " " . $values['order'];
+		
+		$qCount = DB::Prepare(str_replace('{{KEYS}}', 'COUNT(*) AS count', $sql));
+		DB::Execute($qCount, $values);
+		$qCount = DB::Fetch($qCount);
+		self::$totalResults = $qCount->count;
+		self::$pageCount = ceil($qCount->count / $values['limit']);
+		
+		$q = DB::Prepare(str_replace('{{KEYS}}', $values['keys'], $sql) . " LIMIT " . ($values['limit'] * ($values['page'] - 1)) . ", " . $values['limit']);
 		
 		unset($values['keys']);
 		unset($values['limit']);
