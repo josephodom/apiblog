@@ -1,3 +1,18 @@
+html,
+body
+{
+	height: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+}
+
+footer {
+	margin-top: 1em;
+}
+
 header {
 	margin-bottom: 1em;
 }
@@ -10,6 +25,10 @@ h2 small {
 
 .list-posts li {
 	margin-bottom: 2em;
+}
+
+main {
+	flex-grow: 1;
 }
 
 .pagination-container {

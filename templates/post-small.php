@@ -1,6 +1,8 @@
 <div class="box">
 	<h2 class="title is-4">
-		<?=$title?>
+		<a href="<?=url()?>/post/<?=$pid?>-<?=toSlug($title)?>/">
+			<?=$title?>
+		</a>
 		
 		<small>
 			Posted <?=date('Y-m-d h:i:sa')?>

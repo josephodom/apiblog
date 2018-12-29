@@ -1,7 +1,12 @@
 <?php
 
 $routes = [
-	'' => 'index',
+	'404' => function(){
+		http_response_code(404);
+		
+		return '<div class="container"><h1 class="title is-2">Page not Found</h1><p>Could not find the requested page.</p></div>';
+	},
+	
 	'index' => 'archive',
 	'archive' => function(){
 		global $uri;
@@ -15,9 +20,21 @@ $routes = [
 		return template('posts-archive', [ 'page' => $page, 'posts' => Blog::Read([ 'page' => $page ]) ]);
 	},
 	
-	'nothing' => function(){
-		die('nothing.');
-	}
+	'post' => function(){
+		global $uri;
+		
+		$pid = false;
+		
+		if(count($uri) >= 2){
+			$pid = @array_shift(explode('-', $uri[1]));
+		}
+		
+		if(!$pid || !is_numeric($pid) || empty($post = Blog::Read([ 'where'=> [ [ 'key' => 'pid', 'value' => $pid ], ], ]))){
+			return $GLOBALS['routes']['404']();
+		}
+		
+		return template('post-single', (array)$post);
+	},
 ];
 
 ?>

@@ -29,7 +29,7 @@ DB::Init('localhost', 'apiblog', 'root', '');
 
 // If there's not an explicit requested route, just make $route blank
 if(empty($route = $_GET['route'])){
-	$route = '';
+	$route = 'index';
 }
 
 // $uri is used for getting parameters not included in the route string
@@ -59,11 +59,7 @@ while(is_string($route) && !empty($routes[$route]));
 
 // If the route isn't callable, just make $route a callable that gives a 404
 if(!is_callable($route)){
-	$route = function(){
-		http_response_code(404);
-		
-		return '<div class="container"><h1>Page not Found</h1><p>Could not find the requested page.</p></div>';
-	};
+	$route = $routes['404'];
 }
 
 

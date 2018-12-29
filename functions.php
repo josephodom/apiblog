@@ -1,5 +1,19 @@
 <?php
 
+function debug(){
+	ob_start();
+	
+	echo '<pre>';
+	
+	foreach(func_get_args() as $arg){
+		echo print_r($arg, true) . "\n";
+	}
+	
+	echo '</pre>';
+	
+	return ob_get_clean();
+}
+
 function FatalError($e){
 	$errorFile = 'apiblog_error_log';
 	
@@ -102,6 +116,28 @@ function template($file, $vars = []){
 	include $file;
 	// Now, return all of the recorded output
 	return ob_get_clean();
+}
+
+// Turn a string into a slug
+function toSlug($string){
+	// Make everything lowercase
+	$string = strtolower($string);
+	
+	// Turn anything not alpha-numberic into a space
+	$string = preg_replace('/[^a-z0-9]/', ' ', $string);
+	
+	// Drop redundant spaces
+	do {
+		$oldString = $string;
+		$string = str_replace('  ', ' ', $string);
+	}
+	while($string != $oldString);
+	
+	// Replace spaces with dashes
+	$string = str_replace(' ', '-', $string);
+	
+	// Return the slug
+	return $string;
 }
 
 // Get the base URL to the site

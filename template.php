@@ -11,7 +11,7 @@
 
 <body>
 
-<header>
+<header class="section">
 	<div class="container">
 		<h1 class="title is-1">
 			APIBlog
@@ -19,11 +19,11 @@
 	</div>
 </header>
 
-<main>
+<main class="section">
 	<?=$yield?>
 </main>
 
-<footer>
+<footer class="footer">
 	<div class="container">
 		&copy; Joseph Odom <?=date('Y')?>
 	</div>
