@@ -6,7 +6,7 @@
 			</li>
 		<?php endforeach; ?></ul>
 		
-		<?=template('pagination', [ 'page' => $page, 'pageCount' => 2])?>
+		<?=template('pagination', [ 'page' => $page, 'pageCount' => Blog::$pageCount ])?>
 	<?php else: ?>
 		<p class="title is-3">
 			No posts found

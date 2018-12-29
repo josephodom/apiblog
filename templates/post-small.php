@@ -5,11 +5,11 @@
 		</a>
 		
 		<small>
-			Posted <?=date('Y-m-d h:i:sa')?>
+			Posted <?=date('Y-m-d h:i:sa', $date_created)?>
 		</small>
 	</h2>
 	
 	<div class="content">
-		<?=nl2p(htmlentities($message))?>
+		<?=excerpt($message)?>
 	</div>
 </article>

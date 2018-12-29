@@ -13,6 +13,10 @@
 			
 			<ul>
 				<li>
+					SEO-friendly Clean URLs
+				</li>
+				
+				<li>
 					API class <code>Blog</code> with CRUD and pagination functionality for blog posts, essentially a proto-Model class
 				</li>
 				

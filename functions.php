@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Gets debug text for however many parameters you give it
+ *
+ * @return string print_r for each param wrapped in <pre>
+ */
 function debug(){
 	ob_start();
 	
@@ -14,6 +19,41 @@ function debug(){
 	return ob_get_clean();
 }
 
+/**
+ * Get an excerpt of a passage of text
+ *
+ * @param string $text The passage of text
+ * @param integer $wordLimit The word limit. Default 50
+ * @return string The passage of text trimmed down to the given word limit
+ */
+function excerpt($text, $wordLimit = 50){
+	$text = htmlentities($text);
+	
+	$text = explode(' ', $text);
+	
+	$return = [];
+	
+	for($i=0; $i<$wordLimit; $i++){
+		if(empty($text[$i])){
+			break;
+		}
+		
+		$return[] = $text[$i];
+		
+		if($i >= $wordLimit - 1){
+			$return[] = ' [...]';
+		}
+	}
+	
+	return implode(' ', $return);
+}
+
+/**
+ * Kills the page and gives a 500 error page; logs the error if one is given
+ *
+ * @param mixed $e An exception, string, etc to be logged to the error file
+ * @return void
+ */
 function FatalError($e = false){
 	if(!empty($e)){
 		$errorFile = 'apiblog_error_log';
@@ -75,7 +115,12 @@ main {
 </html>');
 }
 
-// Turn natural input content into HTML paragraphs
+/**
+ * Turn formatted text into HTML paragraphs. Removes redundant spacing
+ *
+ * @param string $content The passage of text
+ * @return string The text turned into HTML paragraphs
+ */
 function nl2p($content){
 	// First, let's drop any return characters that might cause confusion
 	$content = str_replace("\r", '', $content);
@@ -99,7 +144,13 @@ function nl2p($content){
 	return $content;
 }
 
-// Get a template
+/**
+ * Gets a template parts, makes given variables local to the file
+ *
+ * @param string $file The path of the template part past ./templates/ and before .php
+ * @param array $vars Associative array of variables to make local to the template file
+ * @return string The output of the template file
+ */
 function template($file, $vars = []){
 	// Make sure the requested template exists
 	// If it doesn't, just return false
@@ -120,7 +171,12 @@ function template($file, $vars = []){
 	return ob_get_clean();
 }
 
-// Turn a string into a slug
+/**
+ * Turns a string into a URL-safe slug
+ *
+ * @param string $string The string to be make URL-safe
+ * @return string The URL-safe slug
+ */
 function toSlug($string){
 	// Make everything lowercase
 	$string = strtolower($string);
@@ -142,7 +198,11 @@ function toSlug($string){
 	return $string;
 }
 
-// Get the base URL to the site
+/**
+ * Gets the base URL to the CMS. Use this for links, asset including, etc. Relative linking isn't safe due to the Clean URLs
+ *
+ * @return string The URL
+ */
 function url(){
 	return
 		'http' . (
