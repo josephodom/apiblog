@@ -6,6 +6,10 @@
 		
 		<small>
 			Posted <?=date('Y-m-d h:i:sa', $date_created)?>
+			
+			<?php if(!empty($date_last_edited)): ?>
+				(Edited <?=date('Y-m-d h:i:sa', $date_last_edited)?>)
+			<?php endif; ?>
 		</small>
 	</h2>
 	
