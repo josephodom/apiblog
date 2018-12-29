@@ -5,11 +5,23 @@ body
 }
 
 body {
+	background-color: #F5F5F5;
 	display: flex;
 	flex-direction: column;
 }
 
-footer {
+a {
+	transition: all 0.25s ease;
+}
+
+a:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+	color: #FFF;
+}
+
+footer.footer {
+	background-color: #333;
+	color: #CCC;
 	margin-top: 1em;
 }
 
@@ -29,6 +41,21 @@ h2 small {
 
 main {
 	flex-grow: 1;
+}
+
+nav .list-nav-links {
+	font-size: 0;
+}
+
+nav .list-nav-links li {
+	display: inline-block;
+	font-size: 1rem;
+}
+
+nav .list-nav-links li a {
+	display: block;
+	padding: 0.5em;
+	text-transform: uppercase;
 }
 
 .pagination-container {

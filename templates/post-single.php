@@ -1,5 +1,5 @@
 <div class="container">
-	<div class="box">
+	<article class="box">
 		<h2 class="title is-4">
 			<?=$title?>
 			
@@ -11,5 +11,5 @@
 		<div class="content">
 			<?=nl2p(htmlentities($message))?>
 		</div>
-	</div>
+	</article>
 </div>

@@ -7,6 +7,10 @@ $routes = [
 		return '<div class="container"><h1 class="title is-2">Page not Found</h1><p>Could not find the requested page.</p></div>';
 	},
 	
+	'500' => function(){
+		FatalError();
+	},
+	
 	'index' => 'archive',
 	'archive' => function(){
 		global $uri;
@@ -34,6 +38,10 @@ $routes = [
 		}
 		
 		return template('post-single', (array)$post);
+	},
+	
+	'about' => function(){
+		return template('page-about');
 	},
 ];
 

@@ -16,6 +16,22 @@
 		<h1 class="title is-1">
 			APIBlog
 		</h1>
+		
+		<nav>
+			<ul class="list-nav-links">
+				<li>
+					<a href="<?=url()?>/archive/">
+						Blog
+					</a>
+				</li>
+				
+				<li>
+					<a href="<?=url()?>/about/">
+						About
+					</a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 </header>
 

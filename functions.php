@@ -14,16 +14,18 @@ function debug(){
 	return ob_get_clean();
 }
 
-function FatalError($e){
-	$errorFile = 'apiblog_error_log';
-	
-	$errorsSoFar = '';
-	
-	if(file_exists($errorFile)){
-		$errorsSoFar = file_get_contents($errorFile);
+function FatalError($e = false){
+	if(!empty($e)){
+		$errorFile = 'apiblog_error_log';
+		
+		$errorsSoFar = '';
+		
+		if(file_exists($errorFile)){
+			$errorsSoFar = file_get_contents($errorFile);
+		}
+		
+		file_put_contents($errorFile, $errorsSoFar . '[ ' . date('Y-m-d g:i:sa') . ' ] ' . $e . "\n\n");
 	}
-	
-	file_put_contents($errorFile, $errorsSoFar . '[ ' . date('Y-m-d g:i:sa') . ' ] ' . $e . "\n\n");
 	
 	http_response_code(500);
 	
