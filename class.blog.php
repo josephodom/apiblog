@@ -13,7 +13,7 @@ class Blog {
 	// == STATIC FUNCTIONS ==
 	
 	public static function Create($values){
-		$q = DB::Prepare("INSERT INTO posts (uid, title, message, date_created) VALUES (:uid, :title, :message, :date_created);");
+		$q = DB::Prepare("INSERT INTO posts (title, message, date_created) VALUES (:title, :message, :date_created);");
 		
 		return DB::Execute($q, $values);
 	}

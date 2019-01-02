@@ -1,0 +1,8 @@
+[ 2019-01-02 2:11:45pm ] PDOException: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens in C:\xampp\htdocs\portfolio\apiblog\class.db.php:86
+Stack trace:
+#0 C:\xampp\htdocs\portfolio\apiblog\class.db.php(86): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\portfolio\apiblog\class.blog.php(18): DB::Execute(Object(PDOStatement), Array)
+#2 C:\xampp\htdocs\portfolio\apiblog\routes.php(54): Blog::Create(Array)
+#3 C:\xampp\htdocs\portfolio\apiblog\index.php(72): {closure}()
+#4 {main}
+

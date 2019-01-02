@@ -43,6 +43,20 @@ $routes = [
 	'about' => function(){
 		return template('page-about');
 	},
+	
+	'populate' => function(){
+		require_once './vendor/autoload.php';
+		
+		$faker = Faker\Factory::create();
+		
+		Blog::Create([
+			'title' => $faker->realText(25),
+			'message' => $faker->realText(1000),
+			'date_created' => time(),
+		]);
+		
+		die('Success');
+	},
 ];
 
 ?>
